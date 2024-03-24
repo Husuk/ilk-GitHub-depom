@@ -4,7 +4,8 @@ from ayarlar import ayarlar
 import random
 import os
 import requests
-resimler = os.listdir("images")
+cat_resimler = os.listdir("images\cat")
+dog_resimler = os.listdir("images\dog")
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -14,12 +15,18 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 async def on_ready():
     print(f'We have logged in as {bot.user}')
 
-@bot.command
-async def mem(ctx):
-    rastgele_resim=random.choice(resimler)
-    with open(f"images/{rastgele_resim}") as f:
-        resim = discord.File(f)
-    await ctx.send()
+@bot.command()
+async def mem(ctx,a:str):
+    if a == "cat":    
+        rastgele_resim=random.choice(cat_resimler)
+        with open(f"images\{a}\{rastgele_resim}") as f:
+            resim = discord.File(f)
+        await ctx.send(file=resim)
+    if a == "dog":
+        rastgele_resim=random.choice(dog_resimler)
+        with open(f"images\{a}\{rastgele_resim}","r",encoding="utf-8") as f:
+            resim = discord.File(f)
+        await ctx.send(file=resim)
 
 def get_duck_image_url():    
     url = 'https://random-d.uk/api/random'
