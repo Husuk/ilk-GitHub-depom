@@ -24,7 +24,7 @@ async def mem(ctx,a:str):
         await ctx.send(file=resim)
     if a == "dog":
         rastgele_resim=random.choice(dog_resimler)
-        with open(f"images\{a}\{rastgele_resim}","r",encoding="utf-8") as f:
+        with open(f"images\{a}\{rastgele_resim}") as f:
             resim = discord.File(f)
         await ctx.send(file=resim)
 
